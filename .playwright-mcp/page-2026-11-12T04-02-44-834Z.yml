@@ -1,0 +1,40 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Estudo de Inglês" [ref=e6] [cursor=pointer]:
+        - /url: "#/"
+      - generic [ref=e7]: Gramática
+  - main [ref=e8]:
+    - article [ref=e9]:
+      - generic [ref=e10]:
+        - heading "Aula Exemplo (temporária)" [level=1] [ref=e11]
+        - paragraph [ref=e12]: Fixture para verificação das estruturas
+      - generic [ref=e13]:
+        - paragraph [ref=e14]: Introdução fictícia para verificar as estruturas de conteúdo.
+        - generic [ref=e15]:
+          - heading "Seção com tudo" [level=2] [ref=e16]
+          - paragraph [ref=e17]: Primeiro parágrafo de explicação.
+          - paragraph [ref=e18]: Segundo parágrafo de explicação.
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - paragraph [ref=e21]: Example sentence one.
+              - paragraph [ref=e22]: Frase de exemplo um.
+              - paragraph [ref=e23]: Nota sobre o exemplo.
+            - listitem [ref=e24]:
+              - paragraph [ref=e25]: Example sentence two.
+              - paragraph [ref=e26]: Frase de exemplo dois.
+          - generic [ref=e27]:
+            - generic [ref=e29]:
+              - paragraph [ref=e30]: "Exercício fictício 1: complete a frase."
+              - paragraph [ref=e42]: Resposta do exercício 1.
+              - paragraph [ref=e43]: Explicação da resposta 1.
+              - button "Ocultar resposta" [ref=e44]
+            - generic [ref=e33]:
+              - paragraph [ref=e34]: "Exercício fictício 2: escolha a opção."
+              - button "Ver resposta" [ref=e35]
+        - generic [ref=e36]:
+          - heading "Seção só com texto" [level=2] [ref=e37]
+          - paragraph [ref=e38]: Apenas um parágrafo, sem exemplos nem exercícios.
+      - navigation [ref=e39]:
+        - link "← Second Conditional" [ref=e41] [cursor=pointer]:
+          - /url: "#/aula/second-conditional"

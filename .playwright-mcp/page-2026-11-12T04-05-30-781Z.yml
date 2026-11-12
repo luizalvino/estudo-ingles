@@ -1,0 +1,150 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "Estudo de Inglês" [ref=e6] [cursor=pointer]:
+        - /url: "#/"
+      - generic [ref=e7]: Gramática
+  - main [ref=e8]:
+    - article [ref=e9]:
+      - generic [ref=e10]:
+        - heading "Second Conditional" [level=1] [ref=e11]
+        - paragraph [ref=e12]: Situações hipotéticas no presente e no futuro
+      - generic [ref=e13]:
+        - paragraph [ref=e14]: O second conditional fala de situações hipotéticas no presente ou no futuro — coisas imaginárias, improváveis ou conselhos. Conteúdo baseado na Unit 11 (Conditionals) do livro Destination C1–C2.
+        - generic [ref=e15]:
+          - heading "1. A forma básica" [level=2] [ref=e16]
+          - paragraph [ref=e17]: "Estrutura: if + past simple (ou past continuous) na condição, would + infinitivo no resultado. O resultado descreve a consequência imaginária no presente ou no futuro."
+          - paragraph [ref=e18]: "Na escrita, would quase sempre aparece contraído: I'd, you'd, he'd, she'd, we'd, they'd. Quando a oração com if vem primeiro, usamos vírgula separando as duas partes; quando o resultado vem primeiro, sem vírgula."
+          - list [ref=e19]:
+            - listitem [ref=e20]:
+              - paragraph [ref=e21]: What would the local government do if there was an earthquake in the area?
+              - paragraph [ref=e22]: O que o governo local faria se houvesse um terremoto na região?
+              - paragraph [ref=e23]: "Exemplo do livro: condição improvável + consequência imaginária."
+            - listitem [ref=e24]:
+              - paragraph [ref=e25]: If I was/were a gambler, I'd put money on Jim being late.
+              - paragraph [ref=e26]: Se eu fosse jogador, apostaria que o Jim vai se atrasar.
+              - paragraph [ref=e27]: "I'd = I would. Was/were: ambos possíveis no inglês britânico."
+          - generic [ref=e28]:
+            - generic [ref=e30]:
+              - paragraph [ref=e31]: "Complete: If I ___ (have) more time, I ___ (learn) French."
+              - button "Ver resposta" [ref=e32]
+            - generic [ref=e34]:
+              - paragraph [ref=e35]: "Reescreva com a contração: If you studied harder, you would pass."
+              - button "Ver resposta" [ref=e36]
+        - generic [ref=e37]:
+          - heading "2. Quando usar" [level=2] [ref=e38]
+          - paragraph [ref=e39]: "Situações hipotéticas no presente ou futuro: algo que não é verdade agora, mas imaginamos como seria."
+          - paragraph [ref=e40]: "Conselhos com If I were you: a forma clássica de dar conselho em inglês. Sonhos e desejos: falar do que faríamos em uma vida imaginária."
+          - list [ref=e41]:
+            - listitem [ref=e42]:
+              - paragraph [ref=e43]: Do you think it would reduce pollution if the government were to introduce a new tax on petrol?
+              - paragraph [ref=e44]: Você acha que reduziria a poluição se o governo criasse um novo imposto sobre a gasolina?
+              - paragraph [ref=e45]: Situação hipotética no presente.
+            - listitem [ref=e46]:
+              - paragraph [ref=e47]: If I were you, I would accept the job.
+              - paragraph [ref=e48]: Se eu fosse você, aceitaria o emprego.
+              - paragraph [ref=e49]: If I were you é a forma fixa para conselhos (sempre were).
+            - listitem [ref=e50]:
+              - paragraph [ref=e51]: If I won the lottery, I'd travel the world.
+              - paragraph [ref=e52]: Se eu ganhasse na loteria, viajaria pelo mundo.
+              - paragraph [ref=e53]: "Sonho/desejo: condição improvável + resultado imaginado."
+          - generic [ref=e54]:
+            - generic [ref=e56]:
+              - paragraph [ref=e57]: "Dê o conselho com If I were you: You should see a doctor."
+              - button "Ver resposta" [ref=e58]
+            - generic [ref=e60]:
+              - paragraph [ref=e61]: "Complete o desejo: If I ___ (live) near the beach, I ___ (surf) every day."
+              - button "Ver resposta" [ref=e62]
+        - generic [ref=e63]:
+          - heading "3. Variações avançadas" [level=2] [ref=e64]
+          - paragraph [ref=e65]: "Was/were: no inglês britânico, was e were são aceitos após if (were é mais formal); no americano, usa-se were. Com If I were you, o were é obrigatório nas duas variedades."
+          - paragraph [ref=e66]: "Outros modais podem substituir o would no resultado: might e could. Unless equivale a if... not e também combina com o second conditional."
+          - list [ref=e67]:
+            - listitem [ref=e68]:
+              - paragraph [ref=e69]: If the weather was better, we could have a picnic.
+              - paragraph [ref=e70]: Se o tempo estivesse melhor, poderíamos fazer um piquenique.
+              - paragraph [ref=e71]: "Could no lugar de would: possibilidade em vez de certeza."
+            - listitem [ref=e72]:
+              - paragraph [ref=e73]: Unless governments act now, the environment is really going to suffer.
+              - paragraph [ref=e74]: A menos que os governos ajam agora, o meio ambiente vai sofrer muito.
+              - paragraph [ref=e75]: Unless = if... not. Com passado (unless it rained...), o resultado vai para would.
+          - generic [ref=e76]:
+            - generic [ref=e78]:
+              - paragraph [ref=e79]: "Reescreva com could: If the weather was better, we would have a picnic."
+              - button "Ver resposta" [ref=e80]
+            - generic [ref=e82]:
+              - paragraph [ref=e83]: "Reescreva com unless: If governments do not act now, the environment will suffer."
+              - button "Ver resposta" [ref=e84]
+        - generic [ref=e85]:
+          - heading "4. Conditionals mistos e inversão formal" [level=2] [ref=e86]
+          - paragraph [ref=e87]: "Mistos: a condição e o resultado podem estar em tempos diferentes. Passado → presente: algo que aconteceu (ou não) no passado afeta o presente. Presente → passado: uma condição atual explica um resultado passado."
+          - paragraph [ref=e88]: "Inversão formal: em estilo formal, o if pode sumir com Were + sujeito + to + infinitivo, com o mesmo sentido de If we stopped...."
+          - list [ref=e89]:
+            - listitem [ref=e90]:
+              - paragraph [ref=e91]: You might not be in so much trouble if you hadn't started gambling.
+              - paragraph [ref=e92]: Você talvez não estivesse em tantos problemas se não tivesse começado a jogar.
+              - paragraph [ref=e93]: Condição no passado (past perfect), resultado no presente.
+            - listitem [ref=e94]:
+              - paragraph [ref=e95]: If I were you, I would have made Paula buy her own lottery ticket.
+              - paragraph [ref=e96]: Se eu fosse você, teria feito a Paula comprar o próprio bilhete de loteria.
+              - paragraph [ref=e97]: Condição no presente, resultado no passado.
+            - listitem [ref=e98]:
+              - paragraph [ref=e99]: Were we to stop using fossil fuels tomorrow, it would still take decades for the planet to recover.
+              - paragraph [ref=e100]: Mesmo que parássemos de usar combustíveis fósseis amanhã, o planeta ainda levaria décadas para se recuperar.
+              - paragraph [ref=e101]: Forma formal = If we were to stop... / If we stopped....
+          - generic [ref=e102]:
+            - generic [ref=e104]:
+              - paragraph [ref=e105]: Misto ou comum? You might not be in so much trouble if you hadn't started gambling.
+              - button "Ver resposta" [ref=e106]
+            - generic [ref=e108]:
+              - paragraph [ref=e109]: "Reescreva na forma formal: If we stopped using fossil fuels tomorrow, it would still take decades."
+              - button "Ver resposta" [ref=e110]
+        - generic [ref=e111]:
+          - heading "5. Estruturas alternativas" [level=2] [ref=e112]
+          - paragraph [ref=e113]: O inglês tem várias formas de dizer 'se' além do if, muito comuns em textos formais e no C1/C2. Com sentido de second conditional, o verbo depois dessas estruturas vai para o passado, igual ao if.
+          - list [ref=e114]:
+            - listitem [ref=e115]:
+              - paragraph [ref=e116]: Supposing the price of oil tripled tomorrow, what do you think would happen?
+              - paragraph [ref=e117]: Supondo que o preço do petróleo triplicasse amanhã, o que você acha que aconteceria?
+            - listitem [ref=e118]:
+              - paragraph [ref=e119]: I think I'd be quite lonely if it wasn't/weren't for my dog, Buster.
+              - paragraph [ref=e120]: Acho que eu seria bem solitário se não fosse pelo meu cachorro, o Buster.
+            - listitem [ref=e121]:
+              - paragraph [ref=e122]: But for your help, I wouldn't have been able to quit gambling.
+              - paragraph [ref=e123]: Se não fosse pela sua ajuda, eu não teria conseguido parar de jogar.
+            - listitem [ref=e124]:
+              - paragraph [ref=e125]: If you happened to see someone drop litter in the street, what would you do?
+              - paragraph [ref=e126]: Se por acaso você visse alguém jogando lixo na rua, o que faria?
+          - generic [ref=e127]:
+            - generic [ref=e129]:
+              - paragraph [ref=e130]: "Complete com a estrutura do livro: ___ the price of oil tripled tomorrow, what would happen?"
+              - button "Ver resposta" [ref=e131]
+            - generic [ref=e133]:
+              - paragraph [ref=e134]: "Reescreva com if it weren't for: But for your help, I wouldn't be here."
+              - button "Ver resposta" [ref=e135]
+        - generic [ref=e136]:
+          - heading "6. First vs. second conditional" [level=2] [ref=e137]
+          - paragraph [ref=e138]: "First conditional: condição real/possível no presente ou futuro (if + present, will + infinitivo). Second conditional: condição hipotética (if + passado, would + infinitivo). Comparar os dois lado a lado elimina a confusão mais comum."
+          - list [ref=e139]:
+            - listitem [ref=e140]:
+              - paragraph [ref=e141]: If we continue to pollute our planet, future generations will suffer.
+              - paragraph [ref=e142]: Se continuarmos a poluir o planeta, as gerações futuras sofrerão.
+              - paragraph [ref=e143]: "First: ameaça real e possível."
+            - listitem [ref=e144]:
+              - paragraph [ref=e145]: What would the local government do if there was an earthquake in the area?
+              - paragraph [ref=e146]: O que o governo local faria se houvesse um terremoto na região?
+              - paragraph [ref=e147]: "Second: cenário imaginado."
+            - listitem [ref=e148]:
+              - paragraph [ref=e149]: If the people from Greenpeace call, tell them I'll call them back later.
+              - paragraph [ref=e150]: Se o pessoal do Greenpeace ligar, diga que retorno a ligação depois.
+              - paragraph [ref=e151]: "First com imperativo: instrução condicional real."
+          - generic [ref=e152]:
+            - generic [ref=e154]:
+              - paragraph [ref=e155]: First ou second? If we continue to pollute our planet, future generations will suffer.
+              - button "Ver resposta" [ref=e156]
+            - generic [ref=e158]:
+              - paragraph [ref=e159]: First ou second? What would you do if there was an earthquake?
+              - button "Ver resposta" [ref=e160]
+      - navigation [ref=e161]:
+        - link "← Catálogo" [ref=e163] [cursor=pointer]:
+          - /url: "#/"

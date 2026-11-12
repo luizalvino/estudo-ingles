@@ -1,0 +1,19 @@
+- generic [ref=f1e3]:
+  - banner [ref=f1e4]:
+    - generic [ref=f1e5]:
+      - link "Estudo de Inglês" [ref=f1e6] [cursor=pointer]:
+        - /url: "#/"
+      - generic [ref=f1e7]:
+        - generic [ref=f1e8]: Gramática
+        - button "Mudar para tema claro" [active] [ref=f1e23]
+  - main [ref=f1e12]:
+    - generic [ref=f1e13]:
+      - generic [ref=f1e14]:
+        - heading "Aulas" [level=1] [ref=f1e15]
+        - paragraph [ref=f1e16]: Escolha uma aula para começar a estudar
+      - generic [ref=f1e17]:
+        - generic [ref=f1e18]:
+          - generic [ref=f1e19]: Second Conditional
+          - generic [ref=f1e20]: Situações hipotéticas no presente e no futuro
+        - link "Estudar agora" [ref=f1e22] [cursor=pointer]:
+          - /url: "#/aula/second-conditional"
