@@ -4,3 +4,5 @@ dist/
 .DS_Store
 # Livros em PDF ficam só locais (arquivo grande, só fonte de conteúdo)
 *.pdf
+# Metadados locais das sessões do navegador (Playwright MCP)
+.playwright-mcp/
