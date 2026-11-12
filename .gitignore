@@ -2,3 +2,5 @@ node_modules/
 dist/
 *.log
 .DS_Store
+# Livros em PDF ficam só locais (arquivo grande, só fonte de conteúdo)
+*.pdf
