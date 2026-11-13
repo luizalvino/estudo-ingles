@@ -10,6 +10,11 @@ export const lessons: LessonMeta[] = [
     title: "Second Conditional",
     description: "Situações hipotéticas no presente e no futuro",
   },
+  {
+    id: "second-conditional-pratica",
+    title: "Second Conditional na prática",
+    description: "Treino pesado com correção imediata: aquecimento, quiz e reescritas",
+  },
 ]
 
 export function getLesson(id: string): LessonMeta | undefined {
