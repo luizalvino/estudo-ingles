@@ -15,6 +15,16 @@ export const lessons: LessonMeta[] = [
     title: "Second Conditional na prática",
     description: "Treino pesado com correção imediata: aquecimento, quiz e reescritas",
   },
+  {
+    id: "present-perfect-continuous",
+    title: "Present Perfect Continuous",
+    description: "Ações em duração até o presente: forma, since/for e simple vs continuous",
+  },
+  {
+    id: "present-perfect-continuous-pratica",
+    title: "Present Perfect Continuous na prática",
+    description: "Treino pesado com correção imediata: aquecimento, quiz e diálogos",
+  },
 ]
 
 export function getLesson(id: string): LessonMeta | undefined {
