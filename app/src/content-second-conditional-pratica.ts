@@ -120,7 +120,7 @@ const secondConditionalPractice: LessonContent = {
           correctIndex: 1,
         },
         {
-          prompt: "What if ___ you that there's a good chance I can get tickets for the concert?",
+          prompt: "What if I ___ you that there's a good chance I can get tickets for the concert?",
           answer: "were to tell",
           explanation: "'What if I were to tell you' = e se eu te dissesse (forma formal).",
           options: ["were to tell", "were telling", "have told", "would to tell"],
