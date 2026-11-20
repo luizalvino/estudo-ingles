@@ -6,6 +6,21 @@ import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import type { LessonContent, LessonExercise } from "@/content"
 import { isAcceptedAnswer } from "@/lib/answers"
+import { useCountdown } from "@/lib/useCountdown"
+
+const DEFAULT_TYPED_LIMIT_SEC = 20
+const DEFAULT_QUIZ_LIMIT_SEC = 15
+
+function TimerLabel({ seconds }: { seconds: number }) {
+  return (
+    <span
+      role="timer"
+      className={`text-sm font-medium ${seconds <= 5 ? "text-red-600" : "text-muted-foreground"}`}
+    >
+      Tempo: {seconds}s
+    </span>
+  )
+}
 
 function RevealItem({ exercise }: { exercise: LessonExercise }) {
   const [open, setOpen] = useState(false)
@@ -44,10 +59,26 @@ function RevealItem({ exercise }: { exercise: LessonExercise }) {
   )
 }
 
-function TypedExerciseItem({ exercise }: { exercise: LessonExercise }) {
+function TypedExerciseItem({
+  exercise,
+  timed,
+}: {
+  exercise: LessonExercise
+  timed: boolean
+}) {
   const [value, setValue] = useState("")
   const [result, setResult] = useState<"correct" | "incorrect" | null>(null)
+  const [timedOut, setTimedOut] = useState(false)
   const accepted = exercise.acceptedAnswers ?? []
+  const limitSec = exercise.timeLimitSec ?? DEFAULT_TYPED_LIMIT_SEC
+
+  const secondsLeft = useCountdown({
+    running: timed && result === null && !timedOut,
+    limitSec,
+    onExpire: () => setTimedOut(true),
+    resetKey: timed ? "on" : "off",
+  })
+  const locked = result === "correct" || timedOut
 
   const check = () =>
     setResult(isAcceptedAnswer(value, accepted) ? "correct" : "incorrect")
@@ -55,7 +86,10 @@ function TypedExerciseItem({ exercise }: { exercise: LessonExercise }) {
   return (
     <Card>
       <CardContent className="flex flex-col gap-2 pt-6">
-        <p className="text-sm font-medium">{exercise.prompt}</p>
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-sm font-medium">{exercise.prompt}</p>
+          {timed && !locked && <TimerLabel seconds={secondsLeft} />}
+        </div>
         <div className="flex flex-col gap-2 sm:flex-row">
           <Input
             value={value}
@@ -68,14 +102,14 @@ function TypedExerciseItem({ exercise }: { exercise: LessonExercise }) {
             }}
             placeholder="Digite sua resposta"
             aria-label="Sua resposta"
-            disabled={result === "correct"}
+            disabled={locked}
           />
           <Button
             type="button"
             variant="outline"
             size="sm"
             onClick={check}
-            disabled={value.trim().length === 0 || result === "correct"}
+            disabled={value.trim().length === 0 || locked}
           >
             Verificar
           </Button>
@@ -90,10 +124,20 @@ function TypedExerciseItem({ exercise }: { exercise: LessonExercise }) {
             </p>
           </>
         )}
-        {result === "incorrect" && (
+        {result === "incorrect" && !timedOut && (
           <>
             <p className="text-sm font-medium text-red-600">
               Não foi dessa vez — tente de novo.
+            </p>
+            <p className="text-sm text-muted-foreground">
+              {exercise.explanation}
+            </p>
+          </>
+        )}
+        {timedOut && (
+          <>
+            <p className="text-sm font-medium text-red-600">
+              Tempo esgotado! {exercise.answer}
             </p>
             <p className="text-sm text-muted-foreground">
               {exercise.explanation}
@@ -105,20 +149,40 @@ function TypedExerciseItem({ exercise }: { exercise: LessonExercise }) {
   )
 }
 
-function QuizItem({ exercise }: { exercise: LessonExercise }) {
+function QuizItem({
+  exercise,
+  timed,
+}: {
+  exercise: LessonExercise
+  timed: boolean
+}) {
   const options = exercise.options ?? []
   const [selected, setSelected] = useState<number | null>(null)
+  const [timedOut, setTimedOut] = useState(false)
   const baseId = useId()
   const correct = selected !== null && selected === exercise.correctIndex
+  const limitSec = exercise.timeLimitSec ?? DEFAULT_QUIZ_LIMIT_SEC
+
+  const secondsLeft = useCountdown({
+    running: timed && selected === null && !timedOut,
+    limitSec,
+    onExpire: () => setTimedOut(true),
+    resetKey: timed ? "on" : "off",
+  })
+  const locked = selected !== null || timedOut
 
   return (
     <Card>
       <CardContent className="flex flex-col gap-2 pt-6">
-        <p className="text-sm font-medium">{exercise.prompt}</p>
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-sm font-medium">{exercise.prompt}</p>
+          {timed && !locked && <TimerLabel seconds={secondsLeft} />}
+        </div>
         <RadioGroup
           value={selected === null ? "" : String(selected)}
           onValueChange={(value) => setSelected(Number(value))}
           className="flex flex-col gap-2"
+          disabled={locked}
         >
           {options.map((option, index) => (
             <div
@@ -144,26 +208,48 @@ function QuizItem({ exercise }: { exercise: LessonExercise }) {
             </p>
           </>
         )}
+        {timedOut && (
+          <>
+            <p className="text-sm font-medium text-red-600">
+              Tempo esgotado!
+            </p>
+            <p className="text-sm text-muted-foreground">
+              {exercise.explanation}
+            </p>
+          </>
+        )}
       </CardContent>
     </Card>
   )
 }
 
-function ExerciseItem({ exercise }: { exercise: LessonExercise }) {
+function ExerciseItem({
+  exercise,
+  timed,
+}: {
+  exercise: LessonExercise
+  timed: boolean
+}) {
   if (
     exercise.options &&
     exercise.options.length > 0 &&
     exercise.correctIndex != null
   ) {
-    return <QuizItem exercise={exercise} />
+    return <QuizItem exercise={exercise} timed={timed} />
   }
   if (exercise.acceptedAnswers && exercise.acceptedAnswers.length > 0) {
-    return <TypedExerciseItem exercise={exercise} />
+    return <TypedExerciseItem exercise={exercise} timed={timed} />
   }
   return <RevealItem exercise={exercise} />
 }
 
-export function LessonContentView({ content }: { content: LessonContent }) {
+export function LessonContentView({
+  content,
+  timed = false,
+}: {
+  content: LessonContent
+  timed?: boolean
+}) {
   return (
     <div className="flex flex-col gap-8">
       <p className="text-muted-foreground">{content.intro}</p>
@@ -196,7 +282,7 @@ export function LessonContentView({ content }: { content: LessonContent }) {
           {section.exercises && (
             <div className="flex flex-col gap-2">
               {section.exercises.map((exercise, index) => (
-                <ExerciseItem key={index} exercise={exercise} />
+                <ExerciseItem key={index} exercise={exercise} timed={timed} />
               ))}
             </div>
           )}

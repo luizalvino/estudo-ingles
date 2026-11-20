@@ -17,6 +17,11 @@ export interface LessonExercise {
   options?: string[]
   /** Índice da opção correta em `options`. */
   correctIndex?: number
+  /**
+   * Limite em segundos para o modo rápido (cronometrado). Ausente =
+   * usa o padrão do tipo (digitado 20s, quiz 15s).
+   */
+  timeLimitSec?: number
 }
 
 export interface LessonSection {

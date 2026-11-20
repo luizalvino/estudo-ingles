@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import { Button } from "@/components/ui/button"
 import { LessonContentView } from "@/components/LessonContent"
 import { lessonContents } from "@/content"
@@ -6,6 +8,7 @@ import { routeHref } from "@/lib/router"
 
 export function Lesson({ id }: { id: string }) {
   const lesson = getLesson(id)
+  const [timed, setTimed] = useState(false)
 
   if (!lesson) {
     return (
@@ -23,12 +26,23 @@ export function Lesson({ id }: { id: string }) {
 
   return (
     <article className="flex flex-col gap-6">
-      <div>
-        <h1 className="text-2xl font-bold">{lesson.title}</h1>
-        <p className="text-sm text-muted-foreground">{lesson.description}</p>
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold">{lesson.title}</h1>
+          <p className="text-sm text-muted-foreground">{lesson.description}</p>
+        </div>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          aria-pressed={timed}
+          onClick={() => setTimed((value) => !value)}
+        >
+          {timed ? "Modo rápido: on" : "Modo rápido: off"}
+        </Button>
       </div>
       {content ? (
-        <LessonContentView content={content} />
+        <LessonContentView content={content} timed={timed} />
       ) : (
         <p className="text-sm text-muted-foreground">Conteúdo em breve.</p>
       )}
