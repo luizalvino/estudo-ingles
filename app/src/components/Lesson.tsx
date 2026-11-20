@@ -1,14 +1,19 @@
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
+import { DrillSession } from "@/components/DrillSession"
 import { LessonContentView } from "@/components/LessonContent"
-import { lessonContents } from "@/content"
+import {
+  getTimeableExercises,
+  lessonContents,
+  type LessonContent,
+} from "@/content"
 import { getLesson, getNeighborLessons } from "@/lessons"
 import { routeHref } from "@/lib/router"
 
 export function Lesson({ id }: { id: string }) {
   const lesson = getLesson(id)
-  const [timed, setTimed] = useState(false)
+  const [drill, setDrill] = useState(false)
 
   if (!lesson) {
     return (
@@ -22,7 +27,8 @@ export function Lesson({ id }: { id: string }) {
   }
 
   const { prev, next } = getNeighborLessons(id)
-  const content = lessonContents[id]
+  const content = lessonContents[id] as LessonContent | undefined
+  const hasDrill = content ? getTimeableExercises(content).length > 0 : false
 
   return (
     <article className="flex flex-col gap-6">
@@ -31,18 +37,18 @@ export function Lesson({ id }: { id: string }) {
           <h1 className="text-2xl font-bold">{lesson.title}</h1>
           <p className="text-sm text-muted-foreground">{lesson.description}</p>
         </div>
-        <Button
-          type="button"
-          variant="outline"
-          size="sm"
-          aria-pressed={timed}
-          onClick={() => setTimed((value) => !value)}
-        >
-          {timed ? "Modo rápido: on" : "Modo rápido: off"}
-        </Button>
+        {hasDrill && !drill && (
+          <Button type="button" size="sm" onClick={() => setDrill(true)}>
+            Iniciar treino rápido
+          </Button>
+        )}
       </div>
       {content ? (
-        <LessonContentView content={content} timed={timed} />
+        drill && hasDrill ? (
+          <DrillSession content={content} onExit={() => setDrill(false)} />
+        ) : (
+          <LessonContentView content={content} />
+        )
       ) : (
         <p className="text-sm text-muted-foreground">Conteúdo em breve.</p>
       )}

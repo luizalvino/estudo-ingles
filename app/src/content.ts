@@ -39,3 +39,21 @@ export interface LessonContent {
 }
 
 export const lessonContents: Record<string, LessonContent> = {}
+
+/**
+ * Exercício que pode entrar no treino cronometrado: digitado (com lista
+ * de aceitas) ou quiz (com opções e índice correto).
+ */
+export function isTimeableExercise(exercise: LessonExercise): boolean {
+  const isQuiz =
+    (exercise.options?.length ?? 0) > 0 && exercise.correctIndex != null
+  const isTyped = (exercise.acceptedAnswers?.length ?? 0) > 0
+  return isQuiz || isTyped
+}
+
+/** Todos os exercícios cronometráveis da aula, na ordem do conteúdo. */
+export function getTimeableExercises(content: LessonContent): LessonExercise[] {
+  return content.sections
+    .flatMap((section) => section.exercises ?? [])
+    .filter(isTimeableExercise)
+}

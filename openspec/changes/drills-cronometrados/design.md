@@ -2,36 +2,37 @@
 
 ## Context
 
-`LessonContent.tsx` renderiza três formatos via `ExerciseItem`: `RevealItem`, `TypedExerciseItem` (Input + Verificar + `isAcceptedAnswer` de `lib/answers.ts`) e `QuizItem` (RadioGroup + feedback imediato). Não há persistência em lugar nenhum e o modo sem tempo não pode mudar. Ver specs em `specs/timed-drills/spec.md`.
+Já implementado no change: hook `useCountdown` (restante por timestamp, deadline fixado no primeiro `running`, dispara uma vez), `timeLimitSec?` opcional em `LessonExercise` com padrões por tipo (digitado 20s, quiz 15s), e `TypedExerciseItem`/`QuizItem` com countdown, timeout = erro com explicação e trava. A primeira versão ligava os timers na página inteira (mesmo problema do `IntersectionObserver`): todas as questões contavam juntas e o scroll iniciava relógios sem intenção. Ver specs em `specs/timed-drills/spec.md`.
 
 ## Goals / Non-Goals
 
 **Goals:**
-- Reaproveitar os fluxos de acerto/erro existentes para o timeout (mesma UI, mesmo aprendizado).
-- Conteúdo atual funciona sem edição (limites padrão por tipo; override opcional).
+- Trocar o modo "cartões cronometrados numa página" por uma sessão de drill dedicada, uma questão por vez.
+- Reaproveitar os itens existentes (digitado/quiz) e o `useCountdown` sem reescrever o tratamento de acerto/timeout.
 
 **Non-Goals:**
-- Placar persistente, streaks entre sessões, ranking.
-- Áudio, microfone, reconhecimento de fala.
+- Placar persistente, histórico entre sessões, ranking, microfone, áudio.
+- Embaralhar questões (o drill segue a ordem do conteúdo nesta etapa).
+- Cronometrar revela-resposta (fica fora do drill).
 
 ## Decisions
 
-- **Hook `useCountdown` com `setInterval` + cálculo por timestamp (`Date.now`).** Motivo: precisa do efeito colateral de timeout (CSS sozinho não dispara nada); timestamp evita drift quando a aba sofre throttle. Alternativa: decrementar contador puro — deriva sob throttle e timeout chega atrasado.
-- **Timeout reutiliza o caminho de erro atual (locked + resposta/explicação).** Motivo: zero UI nova para os estados de erro; pedagogia consistente (tempo estourado = ainda não automático). Alternativa: tela própria de timeout — mais código para o mesmo aprendizado.
-- **`timeLimitSec?` opcional em `LessonExercise`, com padrões por tipo (digitado 20s, quiz 15s).** Motivo: conteúdo existente roda sem edição; autoria futura ajusta frases longas. Alternativa: constante global única — frases longas viram timeout injusto.
-- **Toggle de modo em estado local da página da aula, padrão desligado.** Motivo: sem persistência por escopo (proposal); recarregar volta ao modo calmo, que é o seguro. Alternativa: localStorage — escopo extra sem ganho pedagógico nesta etapa.
-- **Revela-resposta fora do modo (sem timer).** Motivo: não há resposta a produzir sob pressão; cronometrar leitura seria ruído. Alternativa: esconder esses exercícios no modo rápido — esconderia conteúdo útil de revisão.
+- **Drill em componente próprio (`DrillSession`) que substitui a visão da aula ao ser iniciado.** Motivo: uma questão por vez elimina o scroll, que era a raiz do relógio "começando sem intenção"; o timer pode começar na montagem sem queimar tempo de ninguém. Alternativa: manter cartões na página e ajustar gatilho — paliativo, não resolve leitura prévia nem scroll acidental.
+- **Itens existentes reportam o resultado via callback (`onResult`) e o drill controla fila, progresso e placar.** Motivo: zero duplicação do fluxo de verificação/timeout; o item continua dono do seu estado visual. Alternativa: reescrever os itens dentro do drill — dois códigos divergindo.
+- **Remover `useInView`/`IntersectionObserver` e o modo cronometrado dentro da página.** Motivo: com uma questão montada por vez, visibilidade é garantida por construção; manter o observer seria código morto e reintroduziria o comportamento errado. Alternativa: manter como fallback — confusão de dois gatilhos.
+- **Controle "Iniciar treino rápido" só aparece quando a aula tem pelo menos um exercício cronometrável.** Motivo: aulas teóricas (só reveal) não têm o que treinar; um botão que não faz nada é ruído. Alternativa: sempre visível com aviso — pior UX.
+- **Avanço manual ("Próxima") após o feedback; resumo só da sessão (acertos, erros, timeouts) com "Refazer".** Motivo: ler a explicação faz parte do aprendizado; resumo fecha o loop sem persistência. Alternativa: avanço automático — atropela a explicação; persistir placar — escopo extra fora do proposal.
 
 ## Risks / Trade-offs
 
-- [Risco] Throttle de `setInterval` em aba inativa → Mitigação: restante calculado por timestamp, e o timer pausa/limpa no unmount.
-- [Risco] Ansiedade do timer atrapalhar iniciantes → Mitigação: modo opt-in, desligado por padrão; timeout mostra explicação como qualquer erro.
-- [Trade-off] Sem placar persistente o progresso entre sessões não aparece → aceito: o objetivo aqui é o treino em si, não gamificação.
+- [Risco] Usuário sair no meio do drill perder tudo → Mitigação: aceito no escopo (sem persistência); sair é explícito e o resumo aparece ao concluir.
+- [Risco] Refazer o drill sempre na mesma ordem facilitar por memorização posicional → Mitigação: aceito nesta etapa; embaralhar fica como evolução futura.
+- [Trade-off] Uma questão por vez reduz a visão geral da aula → aceito: o drill é treino focado, não leitura; o modo normal continua completo.
 
 ## Migration Plan
 
-Aditivo. Rollback: remover o toggle (todo o resto continua funcionando sem tempo).
+Substitui a implementação anterior do modo rápido (sem migração de dados). Rollback: remover `DrillSession` e restaurar a renderização com `timed` na página.
 
 ## Open Questions
 
-- (nenhuma — durações padrão são premissas ajustáveis no apply)
+- (nenhuma — embaralhar questões fica explicitamente fora desta etapa)

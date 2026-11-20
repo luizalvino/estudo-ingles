@@ -11,6 +11,8 @@ import { useCountdown } from "@/lib/useCountdown"
 const DEFAULT_TYPED_LIMIT_SEC = 20
 const DEFAULT_QUIZ_LIMIT_SEC = 15
 
+export type ExerciseResult = "correct" | "incorrect" | "timeout"
+
 function TimerLabel({ seconds }: { seconds: number }) {
   return (
     <span
@@ -61,10 +63,14 @@ function RevealItem({ exercise }: { exercise: LessonExercise }) {
 
 function TypedExerciseItem({
   exercise,
-  timed,
+  timed = false,
+  oneShot = false,
+  onResult,
 }: {
   exercise: LessonExercise
-  timed: boolean
+  timed?: boolean
+  oneShot?: boolean
+  onResult?: (result: ExerciseResult) => void
 }) {
   const [value, setValue] = useState("")
   const [result, setResult] = useState<"correct" | "incorrect" | null>(null)
@@ -75,13 +81,20 @@ function TypedExerciseItem({
   const secondsLeft = useCountdown({
     running: timed && result === null && !timedOut,
     limitSec,
-    onExpire: () => setTimedOut(true),
+    onExpire: () => {
+      setTimedOut(true)
+      onResult?.("timeout")
+    },
     resetKey: timed ? "on" : "off",
   })
-  const locked = result === "correct" || timedOut
+  const locked =
+    timedOut || result === "correct" || (oneShot && result !== null)
 
-  const check = () =>
-    setResult(isAcceptedAnswer(value, accepted) ? "correct" : "incorrect")
+  const check = () => {
+    const outcome = isAcceptedAnswer(value, accepted) ? "correct" : "incorrect"
+    setResult(outcome)
+    onResult?.(outcome)
+  }
 
   return (
     <Card>
@@ -127,7 +140,9 @@ function TypedExerciseItem({
         {result === "incorrect" && !timedOut && (
           <>
             <p className="text-sm font-medium text-red-600">
-              Não foi dessa vez — tente de novo.
+              {oneShot
+                ? `Não foi dessa vez. Resposta: ${exercise.answer}`
+                : "Não foi dessa vez — tente de novo."}
             </p>
             <p className="text-sm text-muted-foreground">
               {exercise.explanation}
@@ -151,10 +166,14 @@ function TypedExerciseItem({
 
 function QuizItem({
   exercise,
-  timed,
+  timed = false,
+  oneShot = false,
+  onResult,
 }: {
   exercise: LessonExercise
-  timed: boolean
+  timed?: boolean
+  oneShot?: boolean
+  onResult?: (result: ExerciseResult) => void
 }) {
   const options = exercise.options ?? []
   const [selected, setSelected] = useState<number | null>(null)
@@ -166,10 +185,19 @@ function QuizItem({
   const secondsLeft = useCountdown({
     running: timed && selected === null && !timedOut,
     limitSec,
-    onExpire: () => setTimedOut(true),
+    onExpire: () => {
+      setTimedOut(true)
+      onResult?.("timeout")
+    },
     resetKey: timed ? "on" : "off",
   })
   const locked = selected !== null || timedOut
+
+  const select = (value: string) => {
+    const index = Number(value)
+    setSelected(index)
+    onResult?.(index === exercise.correctIndex ? "correct" : "incorrect")
+  }
 
   return (
     <Card>
@@ -180,7 +208,7 @@ function QuizItem({
         </div>
         <RadioGroup
           value={selected === null ? "" : String(selected)}
-          onValueChange={(value) => setSelected(Number(value))}
+          onValueChange={select}
           className="flex flex-col gap-2"
           disabled={locked}
         >
@@ -201,7 +229,11 @@ function QuizItem({
             <p
               className={`text-sm font-medium ${correct ? "text-green-700" : "text-red-600"}`}
             >
-              {correct ? "Correto!" : "Não foi dessa vez — tente outra opção."}
+              {correct
+                ? "Correto!"
+                : oneShot
+                  ? "Não foi dessa vez."
+                  : "Não foi dessa vez — tente outra opção."}
             </p>
             <p className="text-sm text-muted-foreground">
               {exercise.explanation}
@@ -223,33 +255,45 @@ function QuizItem({
   )
 }
 
-function ExerciseItem({
+export function ExerciseRunner({
   exercise,
   timed,
+  oneShot,
+  onResult,
 }: {
   exercise: LessonExercise
-  timed: boolean
+  timed?: boolean
+  oneShot?: boolean
+  onResult?: (result: ExerciseResult) => void
 }) {
   if (
     exercise.options &&
     exercise.options.length > 0 &&
     exercise.correctIndex != null
   ) {
-    return <QuizItem exercise={exercise} timed={timed} />
+    return (
+      <QuizItem
+        exercise={exercise}
+        timed={timed}
+        oneShot={oneShot}
+        onResult={onResult}
+      />
+    )
   }
   if (exercise.acceptedAnswers && exercise.acceptedAnswers.length > 0) {
-    return <TypedExerciseItem exercise={exercise} timed={timed} />
+    return (
+      <TypedExerciseItem
+        exercise={exercise}
+        timed={timed}
+        oneShot={oneShot}
+        onResult={onResult}
+      />
+    )
   }
   return <RevealItem exercise={exercise} />
 }
 
-export function LessonContentView({
-  content,
-  timed = false,
-}: {
-  content: LessonContent
-  timed?: boolean
-}) {
+export function LessonContentView({ content }: { content: LessonContent }) {
   return (
     <div className="flex flex-col gap-8">
       <p className="text-muted-foreground">{content.intro}</p>
@@ -282,7 +326,7 @@ export function LessonContentView({
           {section.exercises && (
             <div className="flex flex-col gap-2">
               {section.exercises.map((exercise, index) => (
-                <ExerciseItem key={index} exercise={exercise} timed={timed} />
+                <ExerciseRunner key={index} exercise={exercise} />
               ))}
             </div>
           )}
