@@ -1,5 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import './content-past-time-pratica.ts'
+import './content-past-time.ts'
 import './content-present-perfect-continuous-pratica.ts'
 import './content-present-perfect-continuous.ts'
 import './content-second-conditional-pratica.ts'

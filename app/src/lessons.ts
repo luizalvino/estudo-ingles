@@ -25,6 +25,16 @@ export const lessons: LessonMeta[] = [
     title: "Present Perfect Continuous na prática",
     description: "Treino pesado com correção imediata: aquecimento, quiz e diálogos",
   },
+  {
+    id: "past-time",
+    title: "Past Time",
+    description: "Past simple, continuous e perfect: narrar o que aconteceu antes de agora",
+  },
+  {
+    id: "past-time-pratica",
+    title: "Past Time na prática",
+    description: "Treino pesado com correção imediata: aquecimento, quiz e completions",
+  },
 ]
 
 export function getLesson(id: string): LessonMeta | undefined {
