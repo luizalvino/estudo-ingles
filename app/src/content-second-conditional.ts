@@ -216,6 +216,85 @@ const secondConditional: LessonContent = {
         },
       ],
     },
+    {
+      id: "treino-rapido",
+      title: "7. Treino rápido",
+      body: [
+        "Questões curtas para fixar forma, inversão e estruturas alternativas. O modo drill usa exatamente estas questões.",
+      ],
+      exercises: [
+        {
+          prompt: "Complete: If I ___ (know) the answer, I ___ (tell) you.",
+          answer: "If I knew the answer, I'd tell you.",
+          explanation: "Passado (knew) na condição + would na consequência.",
+          acceptedAnswers: [
+            "If I knew the answer, I'd tell you.",
+            "If I knew the answer I'd tell you.",
+            "If I knew the answer, I would tell you.",
+            "If I knew the answer I would tell you.",
+          ],
+        },
+        {
+          prompt: "Complete: If she ___ (not/be) so busy, she ___ (come) to the party.",
+          answer: "If she wasn't so busy, she'd come to the party.",
+          explanation: "Was/were são aceitos após if; o resultado leva would ('d).",
+          acceptedAnswers: [
+            "If she wasn't so busy, she'd come to the party.",
+            "If she wasn't so busy, she would come to the party.",
+            "If she weren't so busy, she'd come to the party.",
+            "If she weren't so busy, she would come to the party.",
+            "If she wasn't so busy she'd come to the party.",
+            "If she weren't so busy she'd come to the party.",
+          ],
+        },
+        {
+          prompt: "Complete com could: If we ___ (have) a car, we ___ (drive) to the beach.",
+          answer: "If we had a car, we could drive to the beach.",
+          explanation: "Could substitui would para indicar possibilidade.",
+          acceptedAnswers: [
+            "If we had a car, we could drive to the beach.",
+            "If we had a car we could drive to the beach.",
+          ],
+        },
+        {
+          prompt: "Reescreva com unless: I won't go to the party if you don't come with me.",
+          answer: "Unless you come with me, I won't go to the party.",
+          explanation: "Unless = if... not; o verbo volta à forma afirmativa (come).",
+          acceptedAnswers: [
+            "Unless you come with me, I won't go to the party.",
+            "Unless you come with me I won't go to the party.",
+          ],
+        },
+        {
+          prompt: "If I had more money, I ___ travel more.",
+          answer: "would",
+          explanation: "Condição hipotética no presente → would + infinitivo.",
+          options: ["would", "will", "would have", "am"],
+          correctIndex: 0,
+        },
+        {
+          prompt: "What ___ you do if you found a wallet in the street?",
+          answer: "would",
+          explanation: "Cenário imaginado → would + infinitivo na pergunta.",
+          options: ["will", "would", "do", "did"],
+          correctIndex: 1,
+        },
+        {
+          prompt: "___ it not for my dog, I think I'd be quite lonely.",
+          answer: "Were",
+          explanation: "Were it not for = if it weren't for (inversão formal).",
+          options: ["Had", "If", "Were", "Should"],
+          correctIndex: 2,
+        },
+        {
+          prompt: "Unless governments ___ now, the environment is going to suffer.",
+          answer: "act",
+          explanation: "Depois de unless, presente afirmativo (unless = if... not).",
+          options: ["acting", "will act", "acted", "act"],
+          correctIndex: 3,
+        },
+      ],
+    },
   ],
 }
 

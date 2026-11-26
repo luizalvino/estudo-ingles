@@ -202,6 +202,73 @@ const presentPerfectContinuous: LessonContent = {
         },
       ],
     },
+    {
+      id: "treino-rapido",
+      title: "7. Treino rápido",
+      body: [
+        "Questões curtas de forma, marcadores e verbos de estado. O modo drill usa exatamente estas questões.",
+      ],
+      exercises: [
+        {
+          prompt: "Complete: They ___ (work) on the project since Monday.",
+          answer: "They've been working on the project since Monday.",
+          explanation: "Since + ponto inicial → have + been + -ing.",
+          acceptedAnswers: [
+            "They've been working on the project since Monday.",
+            "They have been working on the project since Monday.",
+          ],
+        },
+        {
+          prompt: "Complete: I ___ (read) that book for two weeks.",
+          answer: "I've been reading that book for two weeks.",
+          explanation: "For + período, ação que continua até agora → PPC.",
+          acceptedAnswers: [
+            "I've been reading that book for two weeks.",
+            "I have been reading that book for two weeks.",
+          ],
+        },
+        {
+          prompt: "Complete com since ou for: We've been living here ___ 2020.",
+          answer: "since",
+          explanation: "Since + ponto no tempo (2020).",
+          acceptedAnswers: ["since"],
+        },
+        {
+          prompt: "Complete com since ou for: She's been studying English ___ three years.",
+          answer: "for",
+          explanation: "For + período de tempo (three years).",
+          acceptedAnswers: ["for"],
+        },
+        {
+          prompt: "How long ___ you been waiting here?",
+          answer: "have",
+          explanation: "Pergunta com you → have + been + -ing.",
+          options: ["have", "has", "are", "were"],
+          correctIndex: 0,
+        },
+        {
+          prompt: "He ___ been working here since 2018.",
+          answer: "has",
+          explanation: "Terceira pessoa (he) → has + been + -ing.",
+          options: ["have", "has", "is", "was"],
+          correctIndex: 1,
+        },
+        {
+          prompt: "I ___ two essays this week.",
+          answer: "have written",
+          explanation: "Número de coisas (two) → present perfect simple.",
+          options: ["wrote", "have been writing", "have written", "write"],
+          correctIndex: 2,
+        },
+        {
+          prompt: "This chicken ___ very fresh, I think I'll throw it away.",
+          answer: "smells",
+          explanation: "Smell descreve percepção (estado) → simple.",
+          options: ["has smelled", "is smelling", "has been smelling", "smells"],
+          correctIndex: 3,
+        },
+      ],
+    },
   ],
 }
 
